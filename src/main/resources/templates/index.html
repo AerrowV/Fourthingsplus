@@ -2,25 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Frontpage</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>Frontpage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 
 <body>
+<div id="page-container">
 
-<h1>Fourthingsplus</h1>
+    <div id="page-content">
+        <h1>Fourthingsplus</h1>
 
-<form method="post">
+        <div class="centered-form">
+            <form method="post">
 
-    <input type="text" name="username" placeholder="username" required/><br><br>
-    <input type="password" name="password" placeholder="password" required/><br><br>
-    <button type="submit" formaction="/login">Log på</button>
+                <input type="text" name="username" placeholder="username" required/>
+                <input type="password" name="password" placeholder="password" required/>
+                <button class="errormessage" type="submit" formaction="/login">Log på</button>
 
-    <p th:text="${#ctx.message}">You have entered an invalid username or password</p>
-
-</form>
-
+                <p th:text="${#ctx.message}"></p>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

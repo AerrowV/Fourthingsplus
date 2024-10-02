@@ -25,7 +25,7 @@ public class UserMapper {
                     return new User(id, name, password);
                 } else {
 
-                } throw new DatabaseException("Fejl i login. Prøv igen");
+                } throw new DatabaseException("You have entered an invalid username or password");
             }
 
         } catch (SQLException exception) {
