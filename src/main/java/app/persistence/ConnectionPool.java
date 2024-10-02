@@ -11,14 +11,14 @@ import java.util.logging.Logger;
 /***
  * Singleton pattern applied to handling a Hikari ConnectionPool
  */
-public class ConnectionPool
-{
+public class ConnectionPool {
     // TODO: Change default access credentials for MySql server as needed below:
 
     private static final String DEFAULT_USER = "postgres";
     private static final String DEFAULT_PASSWORD = "postgres";
     private static final String DEFAULT_URL = "jdbc:postgresql://localhost/%s?currentSchema=public";
-    private static final String DEFAULT_DB = "messageboard";
+    private static final String DEFAULT_DB = "startcode";
+
     public static ConnectionPool instance = null;
     public static HikariDataSource ds = null;
 
@@ -34,8 +34,7 @@ public class ConnectionPool
      * connection string hardcoded in class
      * @return ConnectionPool object
      */
-    public static ConnectionPool getInstance()
-    {
+    public static ConnectionPool getInstance() {
         return getInstance(DEFAULT_USER, DEFAULT_PASSWORD, DEFAULT_URL, DEFAULT_DB);
     }
 
