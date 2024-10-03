@@ -24,12 +24,35 @@ public class UserMapper {
                     int id = rs.getInt("id");
                     return new User(id, name, password);
                 } else {
+                    throw new DatabaseException("You have entered an invalid username or password");
+                }
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 
-                } throw new DatabaseException("You have entered an invalid username or password");
+    public static void createUser(String name, String password, ConnectionPool connectionPool) throws DatabaseException {
+
+        String sql = "insert into \"user\" (name, password) values (?, ?)";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, name);
+                ps.setString(2, password);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected != 1) {
+                    throw new DatabaseException("Error: Unable to create account. Please try again later.");
+                }
+
             }
 
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            String msg = "Error: Unable to create account";
+            if (exception.getMessage().startsWith("ERROR: duplicate key value ")) {
+                msg = "Error: Unable to create account. Username already taken.";
+            }
+            throw new DatabaseException(msg);
         }
     }
 }

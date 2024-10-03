@@ -9,26 +9,26 @@
 </head>
 
 <body>
-
 <div id="page-container">
 
     <div id="page-content">
         <header>
-        <img th:src="@{/images/fourthingsplus.png}" src="../public/images/fourthingsplus.png" width="80%"/>
+            <img th:src="@{/images/fourthingsplus.png}" src="../public/images/fourthingsplus.png" width="80%"/>
         </header>
+        <p>Please enter user information</p>
+
         <div class="centered-form">
             <form method="post">
 
                 <input type="text" name="username" placeholder="Username" required/>
-                <input type="password" name="password" placeholder="Password" required/>
-                <button type="submit" formaction="/login">Login</button>
+                <input type="password" name="password1" placeholder="Password" required/>
+                <input type="password" name="password2" placeholder="Repeat password" required/>
+                <button class="errormessage" type="submit" formaction="/createuser">Create account</button>
 
-                <p class="errormessage" th:text="${#ctx.message}"></p>
+                <p th:text="${#ctx.message}"></p>
             </form>
         </div>
-        <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
-        <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
-
+        <a href="/index">Return to homepage</a>
     </div>
 </div>
 </body>

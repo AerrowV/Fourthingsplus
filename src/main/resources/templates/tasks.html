@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Frontpage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div id="page-container">
+
+    <div id="page-content">
+        <header>
+            <img th:src="@{/images/fourthingsplus.png}" src="../public/images/fourthingsplus.png" width="80%"/>
+        </header>
+        <h1>Tasks</h1>
+
+        <div class="centered-form">
+
+            <form method="post">
+                <input type="text" name="addtask" placeholder="Add new task"/>
+                <button type="submit" formaction="/addtask">Add</button>
+
+
+                <h2>Todo</h2>
+
+                <table class="task-table">
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="task: ${#ctx.taskList}" th:if="${not task.done}">
+                        <td th:text="${task.name}"></td>
+                        <td>
+                            <button type="submit" name="task_id" formaction="/done" th:value="${task.id}">✓</button>
+                            <button type="submit" name="task_id" formaction="/edittask" th:value="${task.id}">✎</button>
+
+                        </td>
+                    </tr>
+                    </thead>
+
+                </table>
+
+                <h2>Done</h2>
+
+                <table class="task-table">
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="task: ${#ctx.taskList}" th:if="${task.done}">
+                        <td th:text="${task.name}"></td>
+                        <td>
+                            <button type="submit" name="task_id" formaction="/undo" th:value="${task.id}">↶</button>
+                            <button type="submit" name="task_id" formaction="/delete" th:value="${task.id}">🗑</button>
+
+                        </td>
+                    </tr>
+                    </thead>
+
+                </table>
+            </form>
+        </div>
+        <a href="/">Return to homepage</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit task</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="page-container">
+
+    <div id="page-content">
+        <header>
+            <img th:src="@{/images/fourthingsplus.png}" src="../public/images/fourthingsplus.png" width="80%"/>
+        </header>
+        <p>Modify the task name here:</p>
+
+        <div class="centered-form">
+            <form method="post">
+
+                <input type="text" name="task_name" placeholder="" th:value="${#ctx.task.name}"/>
+                <button type="submit" name="task_id" formaction="/updatetask" th:value="${#ctx.task.id}">Update</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

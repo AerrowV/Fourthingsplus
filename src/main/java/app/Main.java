@@ -2,10 +2,12 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.TaskController;
 import app.controllers.UserController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
+
 
 public class Main {
 
@@ -30,5 +32,14 @@ public class Main {
 
         app.get("/", ctx -> ctx.render("index.html"));
         app.post("/login", ctx -> UserController.login(ctx, connectionPool));
+        app.get("/createuser", ctx -> ctx.render("createuser.html"));
+        app.post("/createuser", ctx -> UserController.createUser(ctx, connectionPool));
+        app.get("/logout", ctx -> UserController.logout(ctx));
+        app.post("/addtask", ctx -> TaskController.addTask(ctx, connectionPool));
+        app.post("/done", ctx -> TaskController.done(ctx, true, connectionPool));
+        app.post("/undo", ctx -> TaskController.done(ctx, false, connectionPool));
+        app.post("/delete", ctx -> TaskController.delete(ctx, connectionPool));
+        app.post("/edittask", ctx -> TaskController.edit(ctx, connectionPool));
+        app.post("/updatetask", ctx -> TaskController.update(ctx, connectionPool));
     }
 }
